@@ -1,22 +1,20 @@
 import { useState } from "react";
 
-function InputBox() {
-  // keyword akan menjadi variable yg menyimpan data
-  // setKeyword adalah function untuk update keyword
+function InputBox(props) {
+  // keyword : Bermain
   const [keyword, setKeyword] = useState(100);
 
   const onAddHandler = () => {
-    console.log(keyword);
+    props.addTodos(keyword);
   };
 
   const onInputChange = (event) => {
-    // Value pada tag input akan disimpan ke state keyword
     setKeyword(event.target.value);
   };
 
   return (
-    <div>
-      <p>Isi dari keyword : {keyword}</p>
+    <div className="mb-2">
+      <p>Done 1 of 3</p>
       <input
         type="text"
         className="form-control"
