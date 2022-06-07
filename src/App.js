@@ -6,15 +6,43 @@ function App() {
   const [todos, setTodos] = useState([
     { id: 1, action: "Bangun Tidur", isComplete: true },
     { id: 2, action: "Mandi", isComplete: false },
+    { id: 3, action: "Nyarap", isComplete: false },
   ]);
+
+  const onCompleteTodo = (todoId) => {
+    // todoId : 2
+    const mappedTodos = todos.map((todo) => {
+      // { id: 3, action: "Nyarap", isComplete: false },
+      if (todo.id === todoId) {
+        return { ...todo, isComplete: true };
+      } else {
+        return todo;
+      }
+    });
+
+    setTodos(mappedTodos);
+  };
+
+  const onCancelTodo = () => {};
+
+  const onDeleteTodo = () => {};
 
   const renderList = () => {
     return todos.map((todo) => {
+      let actionClass = "lead";
+      if (todo.isComplete) actionClass += " text-decoration-line-through";
       return (
         <div className="d-flex pt-3 border-bottom justify-content-between">
-          <p className="lead">{todo.action}</p>
+          <p className={actionClass}>{todo.action}</p>
           <div>
-            <button className="btn btn-outline-success">Complete</button>
+            <button
+              onClick={() => {
+                onCompleteTodo(todo.id);
+              }}
+              className="btn btn-outline-success"
+            >
+              Complete
+            </button>
             <button className="btn btn-outline-warning mx-2">Cancel</button>
             <button className="btn btn-outline-danger">Delete</button>
           </div>
@@ -24,9 +52,7 @@ function App() {
   };
 
   const addTodos = (keyword) => {
-    // Bermain
     const todo = { id: Math.random(), action: keyword, isComplete: false };
-    // [{id: 1}, {id: 2}, {id: 0.986789, action: Bermain}]
     setTodos([...todos, todo]);
   };
 
