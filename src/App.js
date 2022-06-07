@@ -3,8 +3,7 @@ import InputBox from "./components/InputBox";
 
 function App() {
   return (
-    <div>
-      <h1>App Component</h1>
+    <div className="container p-5">
       <InputBox />
     </div>
   );
