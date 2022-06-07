@@ -1,11 +1,11 @@
+import "bootstrap/dist/css/bootstrap.css";
+import InputBox from "./components/InputBox";
+
 function App() {
   return (
     <div>
       <h1>App Component</h1>
-      <p>Lorem Ipsum</p>
-      <p>Dragon Ball</p>
-
-      <input />
+      <InputBox />
     </div>
   );
 }
