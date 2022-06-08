@@ -3,16 +3,10 @@ import { useState } from "react";
 import InputBox from "./components/InputBox";
 
 function App() {
-  const [todos, setTodos] = useState([
-    { id: 1, action: "Bangun Tidur", isComplete: true },
-    { id: 2, action: "Mandi", isComplete: false },
-    { id: 3, action: "Nyarap", isComplete: false },
-  ]);
+  const [todos, setTodos] = useState([]);
 
   const onCompleteTodo = (todoId) => {
-    // todoId : 2
     const mappedTodos = todos.map((todo) => {
-      // { id: 3, action: "Nyarap", isComplete: false },
       if (todo.id === todoId) {
         return { ...todo, isComplete: true };
       } else {
@@ -23,9 +17,17 @@ function App() {
     setTodos(mappedTodos);
   };
 
-  const onCancelTodo = () => {};
+  const onCancelTodo = (todoId) => {
+    const mappedTodos = todos.map((todo) => {
+      if (todo.id === todoId) {
+        return { ...todo, isComplete: false };
+      } else {
+        return todo;
+      }
+    });
 
-  const onDeleteTodo = () => {};
+    setTodos(mappedTodos);
+  };
 
   const renderList = () => {
     return todos.map((todo) => {
@@ -43,7 +45,14 @@ function App() {
             >
               Complete
             </button>
-            <button className="btn btn-outline-warning mx-2">Cancel</button>
+            <button
+              onClick={() => {
+                onCancelTodo(todo.id);
+              }}
+              className="btn btn-outline-warning mx-2"
+            >
+              Cancel
+            </button>
             <button className="btn btn-outline-danger">Delete</button>
           </div>
         </div>
