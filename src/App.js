@@ -1,10 +1,24 @@
 import "bootstrap/dist/css/bootstrap.css";
-import { useState } from "react";
+import { useState, useEffect } from "react";
+import axios from "axios";
 import InputBox from "./components/InputBox";
 import TodoItem from "./components/TodoItem";
 
 function App() {
   const [todos, setTodos] = useState([]);
+
+  useEffect(() => {
+    setTimeout(getTodos, 2000);
+  }, []);
+
+  const getTodos = async () => {
+    try {
+      const res = await axios.get("http://localhost:2104/todos");
+      setTodos(res.data);
+    } catch (error) {
+      console.log({ error: error.message, detail: error });
+    }
+  };
 
   const onCompleteTodo = (todoId) => {
     const mappedTodos = todos.map((todo) => {
@@ -65,7 +79,11 @@ function App() {
   return (
     <div className="container p-5">
       <InputBox addTodos={addTodos} todos={todos} />
-      {renderList()}
+      {todos.length ? (
+        renderList()
+      ) : (
+        <h3 style={{ textAlign: "center" }}>Loading ...</h3>
+      )}
     </div>
   );
 }

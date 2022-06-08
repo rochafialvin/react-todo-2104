@@ -1,5 +1,9 @@
 Satu buah komponen hanya boleh return 1 buah element
 
-State adalah sebuah variabel spesial ? karena jika data di state berubah. React akan melakukan re-render (proses menampilkan komponen di browser)
+State adalah sebuah variabel spesial ? karena jika data di state berubah. React akan melakukan re-render (proses menampilkan komponen di browser).
+note : state harus dirubah menggunakan functionnya
 
 Properties adalah sebuah data yang datang dari luar komponen.
+
+useEffect
+Sebuah function yang akan dijalankan S E T E L A H render.
