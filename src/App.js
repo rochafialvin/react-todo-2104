@@ -1,6 +1,7 @@
 import "bootstrap/dist/css/bootstrap.css";
 import { useState } from "react";
 import InputBox from "./components/InputBox";
+import TodoItem from "./components/TodoItem";
 
 function App() {
   const [todos, setTodos] = useState([]);
@@ -29,33 +30,29 @@ function App() {
     setTodos(mappedTodos);
   };
 
+  const onDeleteTodo = (todoId) => {
+    // copy isi dari todos ke tmp
+    const tmp = [...todos];
+    // temukan index todo yang hendak dihapus
+    const index = tmp.findIndex((todo) => todo.id === todoId);
+    // hapus todo dengan menggunakan index yg ditemukan
+    tmp.splice(index, 1);
+    // update todos dengan tmp
+    setTodos(tmp);
+  };
+
   const renderList = () => {
     return todos.map((todo) => {
       let actionClass = "lead";
       if (todo.isComplete) actionClass += " text-decoration-line-through";
       return (
-        <div className="d-flex pt-3 border-bottom justify-content-between">
-          <p className={actionClass}>{todo.action}</p>
-          <div>
-            <button
-              onClick={() => {
-                onCompleteTodo(todo.id);
-              }}
-              className="btn btn-outline-success"
-            >
-              Complete
-            </button>
-            <button
-              onClick={() => {
-                onCancelTodo(todo.id);
-              }}
-              className="btn btn-outline-warning mx-2"
-            >
-              Cancel
-            </button>
-            <button className="btn btn-outline-danger">Delete</button>
-          </div>
-        </div>
+        <TodoItem
+          actionClass={actionClass}
+          todo={todo}
+          onCompleteTodo={onCompleteTodo}
+          onCancelTodo={onCancelTodo}
+          onDeleteTodo={onCompleteTodo}
+        />
       );
     });
   };
