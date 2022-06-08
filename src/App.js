@@ -71,9 +71,15 @@ function App() {
     });
   };
 
-  const addTodos = (keyword) => {
-    const todo = { id: Math.random(), action: keyword, isComplete: false };
-    setTodos([...todos, todo]);
+  const addTodos = async (keyword) => {
+    try {
+      const todo = { id: Math.random(), action: keyword, isComplete: false };
+      await axios.post("http://localhost:2104/todos", todo);
+      getTodos();
+    } catch (error) {
+      alert("Error");
+      console.log({ error });
+    }
   };
 
   return (
