@@ -44,15 +44,14 @@ function App() {
     }
   };
 
-  const onDeleteTodo = (todoId) => {
-    // copy isi dari todos ke tmp
-    const tmp = [...todos];
-    // temukan index todo yang hendak dihapus
-    const index = tmp.findIndex((todo) => todo.id === todoId);
-    // hapus todo dengan menggunakan index yg ditemukan
-    tmp.splice(index, 1);
-    // update todos dengan tmp
-    setTodos(tmp);
+  const onDeleteTodo = async (todoId) => {
+    try {
+      await axios.delete(`http://localhost:2104/todos/${todoId}`);
+      getTodos();
+    } catch (error) {
+      alert("Error");
+      console.log({ error });
+    }
   };
 
   const renderList = () => {
