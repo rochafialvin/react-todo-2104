@@ -20,28 +20,28 @@ function App() {
     }
   };
 
-  const onCompleteTodo = (todoId) => {
-    const mappedTodos = todos.map((todo) => {
-      if (todo.id === todoId) {
-        return { ...todo, isComplete: true };
-      } else {
-        return todo;
-      }
-    });
-
-    setTodos(mappedTodos);
+  const onCompleteTodo = async (todoId) => {
+    try {
+      await axios.patch(`http://localhost:2104/todos/${todoId}`, {
+        isComplete: true,
+      });
+      getTodos();
+    } catch (error) {
+      alert("Error");
+      console.log({ error });
+    }
   };
 
-  const onCancelTodo = (todoId) => {
-    const mappedTodos = todos.map((todo) => {
-      if (todo.id === todoId) {
-        return { ...todo, isComplete: false };
-      } else {
-        return todo;
-      }
-    });
-
-    setTodos(mappedTodos);
+  const onCancelTodo = async (todoId) => {
+    try {
+      await axios.patch(`http://localhost:2104/todos/${todoId}`, {
+        isComplete: false,
+      });
+      getTodos();
+    } catch (error) {
+      alert("Error");
+      console.log({ error });
+    }
   };
 
   const onDeleteTodo = (todoId) => {
