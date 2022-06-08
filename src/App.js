@@ -51,7 +51,7 @@ function App() {
           todo={todo}
           onCompleteTodo={onCompleteTodo}
           onCancelTodo={onCancelTodo}
-          onDeleteTodo={onCompleteTodo}
+          onDeleteTodo={onDeleteTodo}
         />
       );
     });
@@ -64,7 +64,7 @@ function App() {
 
   return (
     <div className="container p-5">
-      <InputBox addTodos={addTodos} />
+      <InputBox addTodos={addTodos} todos={todos} />
       {renderList()}
     </div>
   );

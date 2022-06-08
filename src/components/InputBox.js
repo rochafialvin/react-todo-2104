@@ -12,9 +12,14 @@ function InputBox(props) {
     setKeyword(event.target.value);
   };
 
+  const countCompleteTodo = () => {
+    const completeTodos = props.todos.filter((todo) => todo.isComplete);
+    return `Done ${completeTodos.length} of ${props.todos.length}`;
+  };
+
   return (
     <div className="mb-2">
-      <p>Done 1 of 3</p>
+      <p>{countCompleteTodo()}</p>
       <input
         type="text"
         className="form-control"
